@@ -1,0 +1,810 @@
+{
+  "metadata": {
+    "generated_at": "2026-03-23T01:50:26.845171+00:00",
+    "period": {
+      "start": "2025-12-23",
+      "end": "2026-03-23"
+    },
+    "total_prs_analyzed": 299,
+    "total_engineers": 107,
+    "model_used": "claude-haiku-4-5-20251001"
+  },
+  "methodology": {
+    "summary": "Impact scored across 4 pillars: Contribution (40%), Review (25%), Velocity (20%), Breadth (15%)",
+    "pillars": {
+      "contribution_impact": {
+        "weight": 0.4,
+        "description": "Sum of PR quality scores (complexity, scope, type, risk, novelty). Quality over quantity.",
+        "pr_formula": "complexity*0.25 + scope*0.30 + type_weight*0.20 + risk*0.15 + novelty*0.10"
+      },
+      "review_impact": {
+        "weight": 0.25,
+        "description": "Sum of review quality scores, weighted by the importance of the PR being reviewed.",
+        "review_formula": "(depth*0.40 + detection*0.35 + constructiveness*0.25) * pr_impact/10"
+      },
+      "collaboration_velocity": {
+        "weight": 0.2,
+        "description": "How quickly an engineer reviews others' code and incorporates feedback on their own."
+      },
+      "codebase_breadth": {
+        "weight": 0.15,
+        "description": "Number of distinct codebase zones (frontend, backend API, models, analytics, etc.) touched."
+      }
+    },
+    "final_formula": "contribution*0.40 + review*0.25 + velocity*0.20 + breadth*0.15 -> 0-100"
+  },
+  "engineers": [
+    {
+      "rank": 1,
+      "login": "andrewm4894",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2178292?u=8461034c2873afbebfe143bfb48bdc409bdc2980&v=4",
+      "final_score": 72.9,
+      "pillars": {
+        "contribution_impact": {
+          "score": 100.0,
+          "raw_total": 62.2,
+          "pr_count": 11,
+          "dominant_type": "feature"
+        },
+        "review_impact": {
+          "score": 52.6,
+          "raw_total": 74.1,
+          "review_count": 77
+        },
+        "collaboration_velocity": {
+          "score": 75.4,
+          "median_review_turnaround_hours": 3.7,
+          "median_feedback_incorporation_hours": null
+        },
+        "codebase_breadth": {
+          "score": 30.8,
+          "zones_touched": [
+            "frontend/",
+            "posthog/api/",
+            "posthog/models/",
+            "posthog/tasks/"
+          ],
+          "zones_total": 13
+        }
+      },
+      "top_prs": [
+        {
+          "number": 50073,
+          "title": "feat(alerts): 1/4 add anomaly detection scaffolding with threshold and zscore detectors",
+          "url": "https://github.com/PostHog/posthog/pull/50073",
+          "type_classification": "feature",
+          "composite": 8.4,
+          "scores": {
+            "complexity": 9,
+            "scope_of_impact": 8,
+            "type_weight": 9,
+            "risk_and_judgment": 7,
+            "novelty": 9
+          },
+          "one_line_summary": "Implement anomaly detection framework with four initial detectors (threshold, z-score, MAD, ensemble) to replace simple threshold-based alerts in PostHog.",
+          "reasoning": "This is a substantial architectural addition introducing a new detector framework abstraction with multiple detector implementations, requiring careful algorithm selection and validation. The 4K+ line addition includes new database migrations, API endpoints, frontend UI components, and mathematical implementations (z-score, MAD, ensemble logic), which collectively impact the core alerting subsystem. High novelty and judgment required around backward compatibility with existing threshold alerts, numerical stability, and performance implications of running multiple detectors. This is phase 1 of a larger multi-phase stack."
+        },
+        {
+          "number": 51671,
+          "title": "feat(alerts): add simulate detector endpoint with mini chart preview",
+          "url": "https://github.com/PostHog/posthog/pull/51671",
+          "type_classification": "feature",
+          "composite": 7.4,
+          "scores": {
+            "complexity": 8,
+            "scope_of_impact": 6,
+            "type_weight": 9,
+            "risk_and_judgment": 6,
+            "novelty": 9
+          },
+          "one_line_summary": "Adds alert simulation capability with historical data testing, mini-chart visualization of anomalies, and robustness improvements to PyOD detectors.",
+          "reasoning": "This is a substantial feature spanning backend (simulate endpoint), frontend (UI, date range picker), visualization (Chart.js sparkline), and robustness fixes (inf/nan handling). With 1258+ lines across 23 files, it introduces new API contracts and UX flows. Moderate-to-elevated risk stems from detector logic changes (inf/nan guards) that could affect production alert accuracy, though gating behind feature flag mitigates this. High novelty: users can now validate alert configurations before deployment, a genuinely valuable capability for the alerts system."
+        },
+        {
+          "number": 46561,
+          "title": "feat(alerts): 2/4 add additional anomaly detection detectors",
+          "url": "https://github.com/PostHog/posthog/pull/46561",
+          "type_classification": "feature",
+          "composite": 6.95,
+          "scores": {
+            "complexity": 8,
+            "scope_of_impact": 5,
+            "type_weight": 9,
+            "risk_and_judgment": 5,
+            "novelty": 9
+          },
+          "one_line_summary": "Adds seven new anomaly detection algorithms (IQR, COPOD, ECOD, HBOS, Isolation Forest, KNN, LOF, OCSVM, PCA) via PyOD to expand alert detector capabilities for different data patterns.",
+          "reasoning": "This is a substantial feature addition introducing significant new anomaly detection capability to the alerts system. The 6173 line addition reflects multiple new detector implementations leveraging the PyOD library (already a dependency). The complexity is moderate-to-high due to the algorithmic nature and integration into the existing detector registry, but the modular architecture and clear patterns reduce implementation risk. The feature is well-scoped to the alerts domain and provides genuine value for users with diverse anomaly patterns, justifying the high novelty score despite being an extension of existing framework."
+        },
+        {
+          "number": 51462,
+          "title": "feat(notebooks): add MCP tools for notebook CRUD",
+          "url": "https://github.com/PostHog/posthog/pull/51462",
+          "type_classification": "feature",
+          "composite": 6.9,
+          "scores": {
+            "complexity": 6,
+            "scope_of_impact": 7,
+            "type_weight": 9,
+            "risk_and_judgment": 4,
+            "novelty": 9
+          },
+          "one_line_summary": "Add MCP tools for notebook CRUD operations, enabling AI agents to programmatically manage notebooks through the PostHog MCP server.",
+          "reasoning": "This is a substantial feature adding 5 new MCP tools (list, create, retrieve, update, destroy) for notebooks with full end-to-end testing. The 1036 line addition is mostly auto-generated code (API schemas, tool definitions, snapshots) rather than hand-written logic, reducing actual complexity. It's isolated to the MCP/notebook subsystem with good test coverage, making it low-risk despite the large footprint."
+        },
+        {
+          "number": 51800,
+          "title": "feat(llma): add prompt duplicate endpoint and MCP tool",
+          "url": "https://github.com/PostHog/posthog/pull/51800",
+          "type_classification": "feature",
+          "composite": 6.6,
+          "scores": {
+            "complexity": 7,
+            "scope_of_impact": 5,
+            "type_weight": 9,
+            "risk_and_judgment": 5,
+            "novelty": 8
+          },
+          "one_line_summary": "Adds prompt duplication capability via new REST endpoint and MCP tool, enabling users to fork existing prompts without manual recreation.",
+          "reasoning": "This is a well-scoped feature adding a new endpoint (`/duplicate/`) with input validation, service-layer logic, frontend UI, and MCP integration. While the line count is significant (611 lines), much is auto-generated schema/type code. The feature is relatively contained to the LLM analytics domain, addresses a real UX pain point, and includes tests. Moderate risk stems from cross-system coordination (backend, frontend, MCP) but design is straightforward."
+        }
+      ],
+      "top_reviews": [
+        {
+          "pr_number": 50977,
+          "pr_title": "feat(llma): add review queue models and api",
+          "url": "https://github.com/PostHog/posthog/pull/50977",
+          "weighted_composite": 3.36,
+          "scores": {
+            "review_depth": 6,
+            "issue_detection": 2,
+            "constructiveness": 6
+          },
+          "reasoning": "Andrewm4894 provides thoughtful architectural feedback about potential enhancements (automation rules, trace-to-queue mapping) rather than identifying bugs. The suggestions are constructive for future work, but don't address issues in the current PR itself, making this more of a design discussion than a quality review."
+        },
+        {
+          "pr_number": 50073,
+          "pr_title": "feat(alerts): 1/4 add anomaly detection scaffolding with threshold and zscore detectors",
+          "url": "https://github.com/PostHog/posthog/pull/50073",
+          "weighted_composite": 1.18,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        },
+        {
+          "pr_number": 50073,
+          "pr_title": "feat(alerts): 1/4 add anomaly detection scaffolding with threshold and zscore detectors",
+          "url": "https://github.com/PostHog/posthog/pull/50073",
+          "weighted_composite": 1.18,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "login": "haacked",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19977?u=bb26eb16cda45a61a714df8005abe199ac904c5b&v=4",
+      "final_score": 54.8,
+      "pillars": {
+        "contribution_impact": {
+          "score": 64.7,
+          "raw_total": 40.3,
+          "pr_count": 9,
+          "dominant_type": "refactor"
+        },
+        "review_impact": {
+          "score": 30.6,
+          "raw_total": 43.2,
+          "review_count": 29
+        },
+        "collaboration_velocity": {
+          "score": 77.4,
+          "median_review_turnaround_hours": 2.1,
+          "median_feedback_incorporation_hours": null
+        },
+        "codebase_breadth": {
+          "score": 38.5,
+          "zones_touched": [
+            "posthog/api/",
+            "posthog/management/",
+            "posthog/models/",
+            "posthog/tasks/",
+            "rust/"
+          ],
+          "zones_total": 13
+        }
+      },
+      "top_prs": [
+        {
+          "number": 51854,
+          "title": "feat(flags): implement lazy per-token auth cache with targeted invalidation",
+          "url": "https://github.com/PostHog/posthog/pull/51854",
+          "type_classification": "feature",
+          "composite": 8.1,
+          "scores": {
+            "complexity": 8,
+            "scope_of_impact": 8,
+            "type_weight": 9,
+            "risk_and_judgment": 8,
+            "novelty": 7
+          },
+          "one_line_summary": "Implements cross-service per-token authentication caching in Redis with Django signal-driven invalidation to reduce PostgreSQL load on the feature-flags service.",
+          "reasoning": "This is a substantial distributed systems feature spanning Python and Rust services with cache coherency logic. It requires careful signal handler ordering and invalidation semantics to prevent stale auth decisions; the risk is high if cache invalidation races occur. The scope is broad (affects all token validation in flags service) and the novelty is real (new caching layer), though implementation is incremental. The 2784-line change includes comprehensive test coverage, mitigating some risk."
+        },
+        {
+          "number": 51519,
+          "title": "feat(flags): use prebuilt dependency metadata from Django hypercache",
+          "url": "https://github.com/PostHog/posthog/pull/51519",
+          "type_classification": "performance",
+          "composite": 7.5,
+          "scores": {
+            "complexity": 8,
+            "scope_of_impact": 9,
+            "type_weight": 7,
+            "risk_and_judgment": 6,
+            "novelty": 5
+          },
+          "one_line_summary": "Optimizes Rust feature-flags service evaluation by consuming precomputed dependency metadata from Django's cache instead of rebuilding the dependency graph on every request.",
+          "reasoning": "This is a targeted performance optimization addressing CPU/latency waste in the critical feature-flags path, but introduces cross-system dependency: Rust code now relies on Django's `evaluation_metadata` format and cache behavior. The fallback to old graph-building method provides safety, but requires careful testing of both code paths and their interaction. The 2670-line diff reflects algorithmic changes to graph traversal and test coverage. Medium-high risk given the performance-critical nature and new system coupling, though the approach is sound and well-reviewed."
+        },
+        {
+          "number": 51708,
+          "title": "chore(auth): remove team access cache warming system",
+          "url": "https://github.com/PostHog/posthog/pull/51708",
+          "type_classification": "refactor",
+          "composite": 6.25,
+          "scores": {
+            "complexity": 7,
+            "scope_of_impact": 7,
+            "type_weight": 7,
+            "risk_and_judgment": 6,
+            "novelty": 1
+          },
+          "one_line_summary": "Removes an inefficient, unused cache-warming system that was redundantly warming Redis for 75% of teams that don't need it.",
+          "reasoning": "This is a high-value cleanup that eliminates 4500+ lines of dead code across Celery tasks, signal handlers, and test infrastructure. The author explicitly notes the cache isn't actually used anywhere, making this safe despite touching auth-critical infrastructure. However, it requires careful validation that no codepaths depend on the removed warming behavior—the reviewer correctly flags that related cache code may now be orphaned, indicating some follow-up risk."
+        },
+        {
+          "number": 51416,
+          "title": "chore(auth): enforce NOT NULL on PersonalAPIKey.scopes and remove dead fallbacks",
+          "url": "https://github.com/PostHog/posthog/pull/51416",
+          "type_classification": "refactor",
+          "composite": 5.05,
+          "scores": {
+            "complexity": 4,
+            "scope_of_impact": 5,
+            "type_weight": 7,
+            "risk_and_judgment": 7,
+            "novelty": 1
+          },
+          "one_line_summary": "Enforces NOT NULL constraint on `PersonalAPIKey.scopes` database column and removes defensive null-handling code throughout the codebase after backfilling in prior migration.",
+          "reasoning": "This is a multi-step refactoring that depends on prior migration 1052 having backfilled all NULL values. The database migration uses safety-checker annotations (`not-null-ignore`) appropriately for a small table with guaranteed no-NULL state. Risk is moderate due to touching auth/permissions code across 6 files, but the systematic elimination of null checks reduces future bugs. The work is maintenance-oriented cleanup, not new capability."
+        },
+        {
+          "number": 51812,
+          "title": "ci: skip migration SQL comment for import-only changes",
+          "url": "https://github.com/PostHog/posthog/pull/51812",
+          "type_classification": "config-infra",
+          "composite": 3.25,
+          "scores": {
+            "complexity": 3,
+            "scope_of_impact": 2,
+            "type_weight": 7,
+            "risk_and_judgment": 2,
+            "novelty": 2
+          },
+          "one_line_summary": "Reduces CI noise by only posting SQL output for genuinely new migrations, skipping import-only or formatting changes.",
+          "reasoning": "This is a useful CI/UX improvement using basic git commands to distinguish new migrations from modifications, reducing notification spam without affecting actual migration processing. Low complexity, minimal risk (purely cosmetic CI output), and narrow scope to the GitHub Actions workflow. The logic is straightforward: only run sqlmigrate when files are new to the base branch."
+        }
+      ],
+      "top_reviews": [
+        {
+          "pr_number": 51630,
+          "pr_title": "feat(flags): add in-process group type cache",
+          "url": "https://github.com/PostHog/posthog/pull/51630",
+          "weighted_composite": 4.55,
+          "scores": {
+            "review_depth": 7,
+            "issue_detection": 5,
+            "constructiveness": 8
+          },
+          "reasoning": "The reviewer demonstrates architectural understanding by identifying a potential improvement (using HyperCache for group type mappings) and acknowledging the current limitation (cache invalidation issues). They provide constructive guidance by suggesting a future investigation while validating the current approach as acceptable."
+        },
+        {
+          "pr_number": 51520,
+          "pr_title": "chore(flags): remove legacy read of holdout_groups",
+          "url": "https://github.com/PostHog/posthog/pull/51520",
+          "weighted_composite": 4.13,
+          "scores": {
+            "review_depth": 6,
+            "issue_detection": 6,
+            "constructiveness": 8
+          },
+          "reasoning": "Reviewer identifies outdated documentation that should be updated as part of the cleanup work and provides two actionable paths forward (either include in PR or follow-up). Shows good understanding of maintenance burden, though the suggestion itself is relatively straightforward."
+        },
+        {
+          "pr_number": 51651,
+          "pr_title": "chore(flags): stop writing legacy holdout_groups",
+          "url": "https://github.com/PostHog/posthog/pull/51651",
+          "weighted_composite": 3.22,
+          "scores": {
+            "review_depth": 7,
+            "issue_detection": 6,
+            "constructiveness": 9
+          },
+          "reasoning": "The reviewer demonstrates good architectural thinking by acknowledging why the author chose NOT to do a risky migration (long transactions, WAL pressure, lock contention). This shows understanding of production concerns and validates the decision while suggesting alternative approaches (management command, pod execution) for future cleanup."
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "login": "webjunkie",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59713?u=7bfc22f91a964d0015731031bccaebdf5bddb754&v=4",
+      "final_score": 50.7,
+      "pillars": {
+        "contribution_impact": {
+          "score": 66.0,
+          "raw_total": 41.1,
+          "pr_count": 8,
+          "dominant_type": "refactor"
+        },
+        "review_impact": {
+          "score": 8.1,
+          "raw_total": 11.5,
+          "review_count": 11
+        },
+        "collaboration_velocity": {
+          "score": 70.9,
+          "median_review_turnaround_hours": 7.3,
+          "median_feedback_incorporation_hours": null
+        },
+        "codebase_breadth": {
+          "score": 53.8,
+          "zones_touched": [
+            "ee/",
+            "ee/clickhouse/",
+            "frontend/",
+            "posthog/api/",
+            "posthog/hogql/",
+            "posthog/management/",
+            "posthog/models/"
+          ],
+          "zones_total": 13
+        }
+      },
+      "top_prs": [
+        {
+          "number": 51267,
+          "title": "feat(db): add multi-database setup for products",
+          "url": "https://github.com/PostHog/posthog/pull/51267",
+          "type_classification": "config-infra",
+          "composite": 8.8,
+          "scores": {
+            "complexity": 9,
+            "scope_of_impact": 8,
+            "type_weight": 10,
+            "risk_and_judgment": 9,
+            "novelty": 8
+          },
+          "one_line_summary": "Implement multi-database routing infrastructure for Django products, isolating product databases to prevent cascade failures.",
+          "reasoning": "This is a significant architectural addition that introduces database isolation at the Django router level to prevent incidents like the persons table rename cascade. The complexity is high due to database routing logic, migration management, and configuration plumbing across Docker, settings, and test infrastructure. Risk is high because incorrect routing could cause data consistency issues or silent failures, and it affects the foundational data persistence layer. The novelty is strong as it's a new capability enabling product isolation, addressing a real operational pain point (INC-731)."
+        },
+        {
+          "number": 51754,
+          "title": "revert: \"feat(db): add multi-database setup for products\"",
+          "url": "https://github.com/PostHog/posthog/pull/51754",
+          "type_classification": "refactor",
+          "composite": 6.6,
+          "scores": {
+            "complexity": 6,
+            "scope_of_impact": 8,
+            "type_weight": 7,
+            "risk_and_judgment": 8,
+            "novelty": 1
+          },
+          "one_line_summary": "Reverts the multi-database product architecture introduced in PR #51267, consolidating back to single-database setup.",
+          "reasoning": "This revert removes significant architectural infrastructure (product DB routing, migration logic, docker setup) that was clearly causing integration issues. While the line count is large (-617 net), this is largely deletion of recently-added infrastructure rather than fixing complex bugs, making it a targeted architectural rollback. The moderate-to-high risk reflects the scope of systems affected (DB routing, migrations, product initialization) but is mitigated by reverting to a previously stable state."
+        },
+        {
+          "number": 51562,
+          "title": "chore(experiments): move experiment models to products app",
+          "url": "https://github.com/PostHog/posthog/pull/51562",
+          "type_classification": "refactor",
+          "composite": 6.5,
+          "scores": {
+            "complexity": 8,
+            "scope_of_impact": 6,
+            "type_weight": 7,
+            "risk_and_judgment": 8,
+            "novelty": 1
+          },
+          "one_line_summary": "Moves 7 experiment domain models from core posthog app to dedicated products/experiments app, improving code organization and domain separation with automated import rewriting.",
+          "reasoning": "This is a significant structural refactor moving models across Django apps (69 files touched) requiring careful import rewriting and ForeignKey app label updates. While the actual logic changes are minimal (state-only migrations), the scope spans multiple systems and requires high engineering judgment to ensure no import cycles or missing references. The mechanical nature of the changes (LibCST rewriting, git mv) and successful tests indicate low runtime risk, but the breadth of the change warrants the higher complexity/risk scores."
+        },
+        {
+          "number": 51341,
+          "title": "feat(devex): add product isolation skill and richer product:lint checks",
+          "url": "https://github.com/PostHog/posthog/pull/51341",
+          "type_classification": "refactor",
+          "composite": 6.5,
+          "scores": {
+            "complexity": 7,
+            "scope_of_impact": 6,
+            "type_weight": 7,
+            "risk_and_judgment": 5,
+            "novelty": 8
+          },
+          "one_line_summary": "Add agent skill for product isolation migration and significantly enhance hogli product:lint with pluggable checks and AST-based analysis.",
+          "reasoning": "This is a moderate-to-complex refactor that restructures the linting system into a pluggable architecture while adding new AST-based checks for contracts coverage and ORM boundary violations. The scope spans developer tooling and code organization patterns. Novelty is high (new agent skill + richer linting), but it's primarily internal infrastructure for developers migrating products to the isolated facade pattern. Risk is moderate due to changes to the linting tool that developers depend on, but the architecture is designed with guardrails."
+        },
+        {
+          "number": 51703,
+          "title": "chore(devex): add tach boundary check to product lint",
+          "url": "https://github.com/PostHog/posthog/pull/51703",
+          "type_classification": "config-infra",
+          "composite": 4.7,
+          "scores": {
+            "complexity": 4,
+            "scope_of_impact": 4,
+            "type_weight": 7,
+            "risk_and_judgment": 4,
+            "novelty": 5
+          },
+          "one_line_summary": "Strengthens tach product linting by enforcing module boundary declarations for all Python products and registering 7 previously-untracked products.",
+          "reasoning": "This improves the monorepo's architectural guardrails by closing a gap where new products could bypass tach enforcement. Moderate complexity as it refactors existing check logic and updates configuration, with low risk since it's linting-only and affects development workflow rather than runtime. The novelty is moderate—enhancing existing enforcement rather than new capability. Approval from maintainer indicates alignment."
+        }
+      ],
+      "top_reviews": [
+        {
+          "pr_number": 51406,
+          "pr_title": "feat(devex): Add docker container sidebar to phrocs",
+          "url": "https://github.com/PostHog/posthog/pull/51406",
+          "weighted_composite": 4.98,
+          "scores": {
+            "review_depth": 8,
+            "issue_detection": 9,
+            "constructiveness": 7
+          },
+          "reasoning": "Webjunkie identifies two real functional bugs: incomplete Docker Compose flag parsing (missing --profile handling) and an incorrect docker compose ps flag (-a). These are substantive issues that would cause incorrect behavior in production. The review could be more constructive by suggesting specific fixes rather than just identifying problems."
+        },
+        {
+          "pr_number": 51267,
+          "pr_title": "feat(db): add multi-database setup for products",
+          "url": "https://github.com/PostHog/posthog/pull/51267",
+          "weighted_composite": 1.23,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        },
+        {
+          "pr_number": 51341,
+          "pr_title": "feat(devex): add product isolation skill and richer product:lint checks",
+          "url": "https://github.com/PostHog/posthog/pull/51341",
+          "weighted_composite": 0.91,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "login": "sampennington",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56024559?u=77c01534756596a4e0b5a791d8fc847a5e829280&v=4",
+      "final_score": 48.8,
+      "pillars": {
+        "contribution_impact": {
+          "score": 63.5,
+          "raw_total": 39.5,
+          "pr_count": 8,
+          "dominant_type": "bugfix-critical"
+        },
+        "review_impact": {
+          "score": 5.4,
+          "raw_total": 7.6,
+          "review_count": 14
+        },
+        "collaboration_velocity": {
+          "score": 98.9,
+          "median_review_turnaround_hours": 0.8,
+          "median_feedback_incorporation_hours": 0.1
+        },
+        "codebase_breadth": {
+          "score": 15.4,
+          "zones_touched": [
+            "frontend/",
+            "playwright/"
+          ],
+          "zones_total": 13
+        }
+      },
+      "top_prs": [
+        {
+          "number": 51301,
+          "title": "fix(insights): Compare to previous showing wrong date",
+          "url": "https://github.com/PostHog/posthog/pull/51301",
+          "type_classification": "bugfix-critical",
+          "composite": 6.25,
+          "scores": {
+            "complexity": 5,
+            "scope_of_impact": 6,
+            "type_weight": 10,
+            "risk_and_judgment": 6,
+            "novelty": 3
+          },
+          "one_line_summary": "Fixes incorrect date labels on x-axis when using 'compare to previous period' in insights by ensuring consistent series sorting.",
+          "reasoning": "This addresses a data correctness bug affecting chart visualization where users see wrong period dates—a critical UX issue for data analysis. The fix requires moving logic to Kea state management for consistent series ordering, which touches multiple chart components and has moderate shared-code risk. The fix is well-tested and reviewer-approved, making it a justified critical bugfix despite moderate complexity."
+        },
+        {
+          "number": 51559,
+          "title": "fix(warehouse): backfill HubSpot properties to preserve columns",
+          "url": "https://github.com/PostHog/posthog/pull/51559",
+          "type_classification": "bugfix-critical",
+          "composite": 6.0,
+          "scores": {
+            "complexity": 4,
+            "scope_of_impact": 6,
+            "type_weight": 10,
+            "risk_and_judgment": 6,
+            "novelty": 3
+          },
+          "one_line_summary": "Restore missing HubSpot properties in warehouse by backfilling null-omitted columns before PyArrow processing.",
+          "reasoning": "This addresses a regression from a prior refactoring where HubSpot properties disappeared from warehouse tables, breaking user insights. The fix requires understanding both HubSpot API behavior (omitting null values) and PyArrow's schema inference, making it moderate complexity. The risk is moderate since it touches data import logic that affects multiple customer workspaces, but the solution is conservative (backfilling with None) and well-tested. Critical because it directly impacts warehouse functionality and customer-facing reports."
+        },
+        {
+          "number": 51677,
+          "title": "fix(funnels): Widen PropVal types to support breakdown IDs",
+          "url": "https://github.com/PostHog/posthog/pull/51677",
+          "type_classification": "bugfix-critical",
+          "composite": 5.8,
+          "scores": {
+            "complexity": 4,
+            "scope_of_impact": 6,
+            "type_weight": 9,
+            "risk_and_judgment": 6,
+            "novelty": 3
+          },
+          "one_line_summary": "Fix funnel breakdown by cohort by widening PropVal types to handle large IDs and integer arrays from ClickHouse.",
+          "reasoning": "This addresses a critical serialization failure affecting cohort-based funnel analysis. The fix involves extending enum variants and widening integer types (u32→u64) to handle ClickHouse Array(UInt64) and large sentinel IDs like NOT_IN_COHORT_ID. While the code change is small and localized, the impact spans funnel analytics and requires careful consideration of backward compatibility with existing prop_val serialization across the pipeline."
+        },
+        {
+          "number": 51564,
+          "title": "fix(dashboards): Skip empty dashboard filters",
+          "url": "https://github.com/PostHog/posthog/pull/51564",
+          "type_classification": "bugfix-minor",
+          "composite": 5.3,
+          "scores": {
+            "complexity": 4,
+            "scope_of_impact": 6,
+            "type_weight": 7,
+            "risk_and_judgment": 6,
+            "novelty": 2
+          },
+          "one_line_summary": "Skip empty property filter groups on both frontend and backend to prevent malformed filter groups from appearing in dashboard insights and blocking data loads.",
+          "reasoning": "This fix spans frontend and backend with defensive filtering at both layers (preventing save + graceful skip on query). The 250+ line delta is mostly test coverage, which is appropriate for a fix touching query construction logic. Risk is moderate because empty filters could have downstream effects on cached queries, requiring careful validation that this handles all edge cases."
+        },
+        {
+          "number": 51780,
+          "title": "fix(insights): Trends line including incomplete data",
+          "url": "https://github.com/PostHog/posthog/pull/51780",
+          "type_classification": "bugfix-minor",
+          "composite": 5.0,
+          "scores": {
+            "complexity": 4,
+            "scope_of_impact": 5,
+            "type_weight": 7,
+            "risk_and_judgment": 4,
+            "novelty": 5
+          },
+          "one_line_summary": "Prevents trends lines from rendering with incomplete data to improve insight accuracy.",
+          "reasoning": "This fixes a data integrity issue in trend visualization where incomplete ranges were being displayed, misleading users. The change is moderately complex involving conditional rendering logic and includes good test coverage. Impact is limited to the LineGraph component but affects a core feature (trends insights), with reasonable judgment required around what constitutes 'incomplete' data ranges."
+        }
+      ],
+      "top_reviews": [
+        {
+          "pr_number": 51301,
+          "pr_title": "fix(insights): Compare to previous showing wrong date",
+          "url": "https://github.com/PostHog/posthog/pull/51301",
+          "weighted_composite": 0.88,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        },
+        {
+          "pr_number": 51301,
+          "pr_title": "fix(insights): Compare to previous showing wrong date",
+          "url": "https://github.com/PostHog/posthog/pull/51301",
+          "weighted_composite": 0.88,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        },
+        {
+          "pr_number": 51631,
+          "pr_title": "feat(insights): generate insight description with AI",
+          "url": "https://github.com/PostHog/posthog/pull/51631",
+          "weighted_composite": 0.83,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "login": "MattPua",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3376526?u=450323d42789dc0b81ed0ed29882af26d184bb86&v=4",
+      "final_score": 48.3,
+      "pillars": {
+        "contribution_impact": {
+          "score": 78.2,
+          "raw_total": 48.6,
+          "pr_count": 12,
+          "dominant_type": "bugfix-minor"
+        },
+        "review_impact": {
+          "score": 6.5,
+          "raw_total": 9.1,
+          "review_count": 9
+        },
+        "collaboration_velocity": {
+          "score": 53.7,
+          "median_review_turnaround_hours": 21.0,
+          "median_feedback_incorporation_hours": null
+        },
+        "codebase_breadth": {
+          "score": 30.8,
+          "zones_touched": [
+            "frontend/",
+            "playwright/",
+            "posthog/api/",
+            "posthog/models/"
+          ],
+          "zones_total": 13
+        }
+      },
+      "top_prs": [
+        {
+          "number": 51361,
+          "title": "feat(dashboards): Rich Markdown Text Cards Editor",
+          "url": "https://github.com/PostHog/posthog/pull/51361",
+          "type_classification": "feature",
+          "composite": 6.9,
+          "scores": {
+            "complexity": 7,
+            "scope_of_impact": 6,
+            "type_weight": 9,
+            "risk_and_judgment": 5,
+            "novelty": 8
+          },
+          "one_line_summary": "Implements rich WYSIWYG markdown editor for dashboard text cards with image resizing and unsaved change detection.",
+          "reasoning": "This is a substantial feature addition (~1600 LOC) that reuses TipTap components from Product Tours but requires new integration patterns for text cards. Moderate complexity due to editor state management, markdown conversion, and backward compatibility handling. Scope is focused on dashboard text editing but improves user capability significantly. The large line count is justified by new editor component, tests, and visual snapshots."
+        },
+        {
+          "number": 51197,
+          "title": "feat(dashboards): enable auto refresh for shared dashboard pages",
+          "url": "https://github.com/PostHog/posthog/pull/51197",
+          "type_classification": "feature",
+          "composite": 6.8,
+          "scores": {
+            "complexity": 6,
+            "scope_of_impact": 7,
+            "type_weight": 9,
+            "risk_and_judgment": 6,
+            "novelty": 5
+          },
+          "one_line_summary": "Enables auto-refresh functionality for shared and embedded dashboards to prevent stale data display.",
+          "reasoning": "This feature addresses a real user pain point by extending auto-refresh logic from internal dashboards to public/shared views. The implementation requires coordinating multiple components (refresh indicators, tab titles, headers) and touches shared dashboard rendering logic, introducing moderate risk around edge cases in public link behavior. The change is well-scoped to dashboard functionality but affects an important user-facing feature area."
+        },
+        {
+          "number": 51337,
+          "title": "feat(dashboards): allow customizing Theme mode for shared dashboards",
+          "url": "https://github.com/PostHog/posthog/pull/51337",
+          "type_classification": "feature",
+          "composite": 6.2,
+          "scores": {
+            "complexity": 5,
+            "scope_of_impact": 5,
+            "type_weight": 9,
+            "risk_and_judgment": 5,
+            "novelty": 9
+          },
+          "one_line_summary": "Adds theme mode customization (light/dark/system) to shared and embedded dashboards, extending existing theme support to public-facing components.",
+          "reasoning": "This is a straightforward new feature spanning frontend UI selection, logic plumbing, and backend API changes. Complexity is moderate—primarily state propagation through the sharing flow without novel algorithms. The scope is confined to sharing modals and shared dashboard rendering. Risk is moderate because theme changes affect visual rendering across multiple snapshot-tested components, requiring careful QA, but the feature doesn't touch core analytics logic or auth boundaries. The work adds genuine user capability to match web-app theme flexibility."
+        },
+        {
+          "number": 51610,
+          "title": "feat(dashboards): allow toggling visibility of labels on insights directly from dashboards",
+          "url": "https://github.com/PostHog/posthog/pull/51610",
+          "type_classification": "feature",
+          "composite": 5.65,
+          "scores": {
+            "complexity": 5,
+            "scope_of_impact": 5,
+            "type_weight": 9,
+            "risk_and_judgment": 4,
+            "novelty": 5
+          },
+          "one_line_summary": "Enables users to toggle insight label visibility directly from dashboards via a new dropdown menu, eliminating the need to edit insights separately.",
+          "reasoning": "This feature adds a new UI control for a commonly-needed operation with new logic, helper functions, and test coverage. The +484/-12 line count includes meaningful new code and tests rather than auto-generated content. The moderate complexity stems from coordinating state across dashboard and insight components, but the scope is well-contained. The reviewer's suggestion to move logic to dedicated logic files is constructive feedback on code organization, not a blocker."
+        },
+        {
+          "number": 51497,
+          "title": "feat: optimistic update the user theme mode when changing",
+          "url": "https://github.com/PostHog/posthog/pull/51497",
+          "type_classification": "refactor",
+          "composite": 3.85,
+          "scores": {
+            "complexity": 3,
+            "scope_of_impact": 3,
+            "type_weight": 7,
+            "risk_and_judgment": 2,
+            "novelty": 5
+          },
+          "one_line_summary": "Implements optimistic UI updates for theme changes to reduce perceived latency when switching themes via quick search.",
+          "reasoning": "This is a straightforward UX improvement applying optimistic update pattern to theme selection—a localized, well-isolated change with test coverage. The pattern is proven and low-risk since theme changes don't require complex validation or transaction semantics. Impact is limited to user preferences UI behavior."
+        }
+      ],
+      "top_reviews": [
+        {
+          "pr_number": 51524,
+          "pr_title": "feat: Add a button tile for dashboards",
+          "url": "https://github.com/PostHog/posthog/pull/51524",
+          "weighted_composite": 4.31,
+          "scores": {
+            "review_depth": 6,
+            "issue_detection": 8,
+            "constructiveness": 7
+          },
+          "reasoning": "The reviewer identified a concrete discrepancy between snapshot expectations and actual implementation (missing 'more' button), demonstrating careful visual inspection. The request for changes is specific and actionable, though not deeply architectural in nature."
+        },
+        {
+          "pr_number": 51524,
+          "pr_title": "feat: Add a button tile for dashboards",
+          "url": "https://github.com/PostHog/posthog/pull/51524",
+          "weighted_composite": 1.24,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 2,
+            "constructiveness": 2
+          },
+          "reasoning": "This approval provides conditional acceptance based on unverified assumptions about grab handles but offers no concrete feedback or evidence of review. The casual tone and lack of specificity indicate minimal engagement with the substantial 1711-line change."
+        },
+        {
+          "pr_number": 50405,
+          "pr_title": "feat(journey-builder): Add templates page for journey builder",
+          "url": "https://github.com/PostHog/posthog/pull/50405",
+          "weighted_composite": 0.98,
+          "scores": {
+            "review_depth": 2,
+            "issue_detection": 1,
+            "constructiveness": 1
+          },
+          "reasoning": "Approval/LGTM with no substantive comments"
+        }
+      ]
+    }
+  ]
+}
