@@ -1,5 +1,5 @@
 """Orchestrator: runs gather -> evaluate -> aggregate in sequence.
-Copies results.json to frontend/public/ when done.
+Copies results.json to public/ when done.
 """
 
 import shutil
@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
-FRONTEND_PUBLIC = Path(__file__).resolve().parent.parent / "frontend" / "public"
+FRONTEND_PUBLIC = Path(__file__).resolve().parent.parent / "public"
 
 
 def main():

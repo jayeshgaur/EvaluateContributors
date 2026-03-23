@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.ycombinator.com)",
+      "WebFetch(domain:hamming.ai)",
+      "WebFetch(domain:docs.hamming.ai)",
+      "Bash(python:*)",
+      "Bash(python3:*)",
+      "Bash(pip:*)",
+      "Bash(pip3:*)",
+      "Bash(pnpm:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(node:*)",
+      "Bash(git:*)",
+      "Bash(curl:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(cd:*)",
+      "Bash(echo:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(touch:*)",
+      "Bash(rm:*)",
+      "Bash(chmod:*)",
+      "Bash(pytest:*)",
+      "Bash(uvicorn:*)",
+      "Bash(flask:*)",
+      "Bash(fastapi:*)",
+      "WebFetch(domain:hammingai.notion.site)",
+      "Bash(env)",
+      "Bash(gh repo:*)"
+    ]
+  }
+}
