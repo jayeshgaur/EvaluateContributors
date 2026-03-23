@@ -4,7 +4,7 @@ Identifies the top 5 most impactful engineers at [PostHog](https://github.com/Po
 
 Built for the [Weave](https://workweave.ai) engineering impact assessment.
 
-**Live dashboard:** _[Vercel deployment URL]_
+**Live dashboard:** [_[Vercel deployment URL]_](https://workweave-gules.vercel.app/)
 
 ---
 
@@ -84,7 +84,7 @@ npm run dev
 ```
 
 ### 5. Deploy to Vercel
-Deploy the `frontend/` directory. The dashboard is fully static — no API calls at runtime.
+Deploy. The dashboard is fully static — no API calls at runtime.
 
 ---
 
