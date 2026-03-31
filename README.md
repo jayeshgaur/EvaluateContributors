@@ -2,8 +2,6 @@
 
 Identifies the top 5 most impactful engineers at [PostHog](https://github.com/PostHog/posthog) by analyzing 90 days of GitHub activity — not by counting lines of code or commits, but by evaluating the **quality and substance** of each contribution using LLM-scored metrics.
 
-Built for the [Weave](https://workweave.ai) engineering impact assessment.
-
 **Live dashboard:** [_[Vercel deployment URL]_](https://workweave-gules.vercel.app/)
 
 ---
